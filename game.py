@@ -6,7 +6,7 @@ Created on Fri Nov 15 15:58:14 2019
 """
 
 import tensorflow as tf
-from QL import QL
+#from QL import QL
 from expectminimaxAgent import ExpectMinMaxAgent
 import function
 from board import board
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     randplayer1 = baselineOpponent("x","o")
     randplayer2 = baselineOpponent("o","x")
 #def AgentQLearning(board):
-    agent = QL()  
+    #agent = QL()  
 #DQNAgent = DQNAgent("dqn", 0.95,0.01,True,"o")
     mmAgent = ExpectMinMaxAgent("o","x",3,0.95,0.01)
     c,x,y,z=eva(b,randplayer1,mmAgent)
