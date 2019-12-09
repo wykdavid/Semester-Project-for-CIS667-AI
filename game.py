@@ -112,13 +112,13 @@ def eva(board,player1,player2):
 if __name__ == "__main__":
     tf.reset_default_graph()    
     #BLANK = "_"
-    b = board(6)
+    b = board(3)
     randplayer1 = baselineOpponent("x","o")
     randplayer2 = baselineOpponent("o","x")
 #def AgentQLearning(board):
     agent = QL()  
 #DQNAgent = DQNAgent("dqn", 0.95,0.01,True,"o")
-    mmAgent = ExpectMinMaxAgent("o","x",6,0.95,0.01)
+    mmAgent = ExpectMinMaxAgent("o","x",3,0.95,0.01)
     c,x,y,z=eva(b,randplayer1,mmAgent)
     p = plt.plot(c, z, 'r-', c, x, 'g-', c, y, 'b-')
     
