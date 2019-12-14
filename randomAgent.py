@@ -21,4 +21,7 @@ class baselineOpponent:
         return statep
     def fallback(self,board,s):
         pass
-        
+    def clearmemory(self):
+        pass
+    def getnodes(self):
+        pass

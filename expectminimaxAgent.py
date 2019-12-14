@@ -52,12 +52,14 @@ import function
 
 class ExpectMinMaxAgent:
     
-    def __init__(self,symbol,other_symbol,board_size,gamma,lr):
+    def __init__(self,symbol,other_symbol,board_size,gamma,lr,depth_limit):
         self.symbol = symbol
         self.other_symbol = other_symbol
         self.board_size = board_size
         self.memory = {}
+        self.nodes = 0
         self.depth = 0
+        self.limit = depth_limit
         self.agent = DQNAgent("dqn",gamma,lr,True,symbol,board_size)
         super().__init__()
     
@@ -95,6 +97,8 @@ class ExpectMinMaxAgent:
 
         return neighbor_count,actual_neighbour
     def get_max(self,board):
+        self.nodes+=1
+        
         state1=np.reshape(board,[1,self.board_size*self.board_size])
         depth_count = 0
         for i in state1[0]:
@@ -111,7 +115,7 @@ class ExpectMinMaxAgent:
         hash_state = function.convert(board)
         if hash_state in self.memory:
                 return self.memory[hash_state]
-        if depth_count-1 < 3:
+        if depth_count-1 < self.limit:
             
             
             s = function.score(board,self.symbol,self.other_symbol)
@@ -194,6 +198,8 @@ class ExpectMinMaxAgent:
         return self.memory[hash_state]
             #需要softmax 最大为1 返回选取位置和数值
     def get_min(self,board):
+        self.nodes+=1
+        
         state1=np.reshape(board,[1,self.board_size*self.board_size])
         depth_count = 0
         for i in state1[0]:
@@ -258,3 +264,8 @@ class ExpectMinMaxAgent:
     def fallback(self,board,s):
         #print(self.depth)
         pass
+    def clearmemory(self):
+        self.memory.clear()
+        self.nodes = 0
+    def getnodes(self):
+        return self.nodes
